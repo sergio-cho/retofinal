@@ -30,12 +30,12 @@ public class clientebueno {
                     System.out.println("Haz encontrado ogros , sal de ahi ");
                     if (ogro1.getOgro() < p1.getPplayer()) {
                         System.out.println("Cielos viejo te han quitado 1 de poder ");
-                        int reduc= p1.reductor(pplayer);
-                        p1.setPplayer(reduc);
+                        pplayer=p1.reductor(pplayer);
+                        p1.setPplayer(pplayer);
                     } else {
                         System.out.println("Cielos viejo que suerte que ese un ogro bastante debil has ganado 1 pp");
-                        int aun= p1.aunmentar(pplayer);
-                        p1.setPplayer(aun);
+                        pplayer=p1.aunmentar(pplayer);
+                        p1.setPplayer(pplayer);
                     }
                 }
                 //Parte del mago
@@ -43,14 +43,13 @@ public class clientebueno {
                 System.out.println("Vamos a salvar a las hadas");
                 mago1.setPmago(pmago);
                 if (mago1.getMago() != 0) {
-                    mago1.daño();
-                    int reduc= p1.reductor(pplayer);
-                    p1.setPplayer(reduc);
+                    System.out.println("Raios te quito 1 de poder");
+                    pplayer=p1.reductor(pplayer);
+                    p1.setPplayer(pplayer);
                 } else {
                     System.out.println("Que suerte no nos quito nada");
                     mago1.fallo();
                 }
-                System.out.println("Tienes " + p1.getPplayer() + " de poder");
                 hadas = (int) (Math.random() * (10 - 1 + 1) + 1);
                 System.out.println("Haz rescatado " + hadas + " hadas");
                 hadasR = hadasR - hadas;
@@ -61,34 +60,34 @@ public class clientebueno {
             }
             if (cont=='A' || cont=='a'){
                 System.out.println("Claro que si viejo te ayudaremos aunmentando un poco tu poder");
-                if(pplayer>pmago){
+                if(p1.getPplayer()> mago1.getMago()){
                     System.out.println("Lo siente pero ya no puedo aunmentar tu poder mas seria muy facil");
                 }else {
-                    int aun= p1.aunmentar(pplayer);
-                    p1.setPplayer(aun);
+                    pplayer=p1.aunmentar(pplayer);
+                    p1.setPplayer(pplayer);
                 }
             }
             hadasC=(int)(Math.random()*(10-1+1)+1);
             System.out.println("El mago capturo " +hadasC);
             hadasR=hadasR+hadasC;
             if (hadasC==10){
-                int cap= mago1.capturo(pmago);
-                mago1.setPmago(cap);
+                pmago=mago1.capturo(pmago);
+                mago1.setPmago(pmago);
                 hadasC=hadasC-10;
             }
             thadas=thadas+hadas;
             if (hadas==10){
                 System.out.println("Que genial eres liberaste a las hadas y tu poder subio");
-                int aun= p1.aunmentar(pplayer);
-                p1.setPplayer(aun);
+                pplayer=p1.aunmentar(pplayer);
+                p1.setPplayer(pplayer);
                 System.out.println("El mago perdio poder");
-                int per=mago1.perdio(pmago);
-                mago1.setPmago(per);
+                pmago=mago1.perdio(pmago);
+                mago1.setPmago(pmago);
                 hadas=hadas-10;
             }
             System.out.println("Poder del mago "+mago1.getPmago());
             System.out.println("Tu poder "+p1.getPplayer());
-            if (pmago<=0 || pplayer<= 0 ){
+            if (pmago<=0 || pplayer<= 0 || hadasR <=0){
                 x=true;
             }
         }
@@ -99,6 +98,6 @@ public class clientebueno {
             System.out.println("Lastima vuelve a jugar");
         }
         System.out.println("Tu puntuacion es la siguiente");
-        System.out.println("Total de hadas "+thadas);
+        System.out.println("Total de hadas por rescatar "+thadas);
     }
 }
